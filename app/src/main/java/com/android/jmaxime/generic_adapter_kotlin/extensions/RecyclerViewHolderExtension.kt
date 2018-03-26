@@ -35,12 +35,12 @@ fun RecyclerView.ViewHolder.getQuantityStringFormat(@PluralsRes pluralRes: Int, 
     return getContext().resources.getQuantityString(pluralRes, quantity, quantity)
 }
 
-fun RecyclerView.ViewHolder.getDrawable(@DrawableRes drawableResId: Int): Drawable {
+fun RecyclerView.ViewHolder.getDrawable(@DrawableRes drawableResId: Int): Drawable? {
     return ContextCompat.getDrawable(getContext(), drawableResId)
 }
 
-fun RecyclerView.ViewHolder.getDrawable(@DrawableRes drawableId: Int, @ColorRes colorId: Int): Drawable {
+fun RecyclerView.ViewHolder.getDrawable(@DrawableRes drawableId: Int, @ColorRes colorId: Int): Drawable? {
     val drawable = getDrawable(drawableId)
-    DrawableCompat.setTint(drawable.mutate(), getColor(colorId))
+    DrawableCompat.setTint(drawable?.mutate()!!, getColor(colorId))
     return drawable
 }
