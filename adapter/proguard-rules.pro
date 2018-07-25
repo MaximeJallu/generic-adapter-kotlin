@@ -19,3 +19,8 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-keepattributes InnerClasses
+-keep public class com.android.jmaxime.**
+-keepclassmembers class com.android.jmaxime.** {
+    public *;
+}

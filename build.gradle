@@ -1,11 +1,12 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply plugin: 'checkstyle'
 
 buildscript {
 
     ext.versions = [
-            'compileSdk'    : 26,
+            /*'compileSdk'    : 26,
             'buildTools'    : '27.0.3',
-            'minSdk'        : 17,
+            'minSdk'        : 17,*/
 
             'supportLibrary': '27.1.1',
 
@@ -29,6 +30,37 @@ allprojects {
     }
 }
 
+ext {
+    compileSdkVersion = 27
+    buildToolsVersion = "27.0.3"
+    minSdkVersion = 16
+    targetSdkVersion = 27
+    versionCode = 18072501
+    versionName = "18.07.01"
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+
+checkstyle {
+    toolVersion = '7.6.1'
+    configFile file("${project.rootDir}/code_quality_tools/checkstyle.xml")
+}
+
+task checkstyle(type: Checkstyle) {
+    ignoreFailures false
+    showViolations true
+
+    source 'src/main/java'
+    include '**/*.java'
+
+    classpath = files()
+}
+
+afterEvaluate {
+    if (project.tasks.findByName('check')) {
+        check.dependsOn('checkstyle')
+    }
 }
