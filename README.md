@@ -2,10 +2,6 @@
 ![alt text](https://travis-ci.org/MaximeJallu/generic-adapter-kotlin.svg?branch=develop) [![API](https://img.shields.io/badge/API-16%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=16)
 
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.maximejallu/adapters/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/com.github.maximejallu/adapters)
-
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-RecyclerAdapter--Java-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6400)
-
 # Generic-Adapter-Kotlin:
 
 This tool allows you to no longer worry about adapters. Now you will only create your ViewHolder.
@@ -98,3 +94,7 @@ fun multicellSample(){
         })
 }
 ```
+
+[1]: https://github.com/JakeWharton/butterknife
+[2]: https://github.com/square/picasso
+[3]: https://github.com/bumptech/glide
