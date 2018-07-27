@@ -60,11 +60,11 @@ open class RecyclerAdapter<T>(
     override fun getItemViewType(position: Int): Int {
         val item = this.getItem(position)
         val viewType = if (viewTypeCache.indexOfKey(position) > -1) {
-            viewTypeCache[position]!!
+            viewTypeCache[position]
         } else if (strategyViewType != null && item != null) {
             strategyViewType!!.getItemViewType(position, item)
         } else if (item is Container) {
-            return Math.max(super.getItemViewType(position), item.viewType)
+            return Math.max(super.getItemViewType(position), item.viewType ?: -1)
         } else {
             super.getItemViewType(position)
         }
@@ -79,8 +79,9 @@ open class RecyclerAdapter<T>(
         val classType = register[viewType]!!
         val instance = classType.first.getConstructor(ViewGroup::class.java)?.newInstance(parent)
         val viewHolder: RecyclerViewHolder<T> = instance as RecyclerViewHolder<T>
-        viewHolder.listener = WeakReference(classType.second)
-        viewHolder.viewType = viewType
+        viewHolder.initialize(classType.second, viewType)
+//        viewHolder.listener = WeakReference(classType.second)
+//        viewHolder.viewType = viewType
         return viewHolder
     }
 
@@ -145,12 +146,18 @@ open class RecyclerAdapter<T>(
     fun add(element: T, pos: Int = -1) {
         val position = Math.max(pos, items.size)
         items.add(position, element)
+        if(pos > -1){
+            viewTypeCache.clear()
+        }
         notifyItemInserted(position)
     }
 
     fun add(elements: List<T>, pos: Int = -1) {
         val position = Math.max(pos, items.size)
         items.addAll(position, elements)
+        if(pos > -1){
+            viewTypeCache.clear()
+        }
         notifyItemRangeInserted(position, elements.size)
     }
 
@@ -181,7 +188,7 @@ interface Logger {
 interface RecyclerViewListener
 
 @Suppress("UNCHECKED_CAST")
-class Container(val item: Any? = null, val viewType: Int = -1) {
+class Container(val item: Any? = null, val viewType: Int? = null, val viewGroup: Int? = null) {
 
     fun isEmpty(): Boolean {
         return item == null
