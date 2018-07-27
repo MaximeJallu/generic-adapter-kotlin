@@ -14,17 +14,19 @@ abstract class RecyclerViewHolder<T>(
         bindingViewHolder?.initBinding(target = this, view = itemView)
     }
 
+    protected val item: T get() = value!!
     internal var viewType: Int = -1
-
     private var value: T? = null
-
-    protected val item: T
-        get() = value!!
-
-    var listener: WeakReference<RecyclerViewListener?>? = null
+    private var listener: WeakReference<RecyclerViewListener?>? = null
 
     protected var isBindCompleted: Boolean = false
         private set
+
+    fun initialize(listener: RecyclerViewListener?, viewType: Int) {
+        this.listener = WeakReference(listener)
+        this.viewType = viewType
+        onCreated()
+    }
 
     fun bindApply(item: T?) {
         this.value = item
@@ -34,6 +36,10 @@ abstract class RecyclerViewHolder<T>(
     }
 
     protected abstract fun onBind()
+
+    protected open fun onCreated() {
+
+    }
 
     @Suppress("UNCHECKED_CAST")
     fun <LISTENER> getCommunication(): LISTENER {

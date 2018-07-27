@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         val adapter = RecyclerAdapter<Int>(
             items = ArrayList(),
             defaultViewHolder = ViewOne::class,
-            listener = object :ViewOne.ViewOneListener{
+            listener = object : ViewOne.ViewOneListener {
                 override fun onClick(item: Int) {
                     TODO("not implemented")
                 }
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         /*sample for multi Cell [3 viewholder resgistered for this sample]*/
         adapter.setItemViewTypeStrategy(strategy = object : ViewTypeStrategy<Int> {
             override fun getItemViewType(position: Int, item: Int): Int {
-                return when{
+                return when {
                     position == 0 -> 0
                     item > 5 -> 1
                     else -> 2
@@ -46,19 +46,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     class ViewOne(parent: ViewGroup) : RecyclerViewHolder<Int>(
-            parent, R.layout.support_simple_spinner_dropdown_item
-        ) {
+        parent, R.layout.support_simple_spinner_dropdown_item
+    ) {
 
         init {
-            itemView.setOnClickListener {
+            this.itemView.setOnClickListener {
                 (getCommunication() as ViewOneListener).onClick(item)
             }
         }
+
         override fun onBind() {
             Log.d("MY VALUE", "value is $item")
         }
 
-        interface ViewOneListener: RecyclerViewListener{
+        interface ViewOneListener : RecyclerViewListener {
             fun onClick(item: Int)
         }
     }
