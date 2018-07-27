@@ -9,7 +9,7 @@ Communication management between your Views and your ViewHolders is possible.
 Creating sections is now very easily.
 Enjoy.
 
-# Download [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.maximejallu/adapters/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/com.github.maximejallu/adapters)
+# Download [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.maximejallu/adapters-kotlin/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/com.github.maximejallu/adapters-kotlin)
 buildtool used is 27
 use {exclude group: 'com.android.support'} only if you have problems
 ```groovy
