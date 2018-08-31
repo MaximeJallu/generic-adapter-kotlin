@@ -15,7 +15,7 @@ use {exclude group: 'com.android.support'} only if you have problems
 ```groovy
 dependencies {
     ...
-    implementation ('com.github.maximejallu:adapters-kotlin:{version}')
+    implementation ('com.github.maximejallu:adapters-kotlin:18.08.01')
     ...
 }
 ```

@@ -80,8 +80,6 @@ open class RecyclerAdapter<T>(
         val instance = classType.first.getConstructor(ViewGroup::class.java)?.newInstance(parent)
         val viewHolder: RecyclerViewHolder<T> = instance as RecyclerViewHolder<T>
         viewHolder.initialize(classType.second, viewType)
-//        viewHolder.listener = WeakReference(classType.second)
-//        viewHolder.viewType = viewType
         return viewHolder
     }
 
@@ -181,12 +179,6 @@ open class RecyclerAdapter<T>(
     }
 }
 
-interface Logger {
-    fun log(tag: String, msg: String)
-}
-
-interface RecyclerViewListener
-
 @Suppress("UNCHECKED_CAST")
 class Container(val item: Any? = null, val viewType: Int? = null, val viewGroup: Int? = null) {
 
@@ -197,6 +189,10 @@ class Container(val item: Any? = null, val viewType: Int? = null, val viewGroup:
     fun <CAST> getValue(): CAST {
         return item as CAST
     }
+}
+
+interface Logger {
+    fun log(tag: String, msg: String)
 }
 
 interface ViewTypeStrategy<T> {
